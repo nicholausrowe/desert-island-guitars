@@ -6,16 +6,10 @@ export default class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formatter: value =>
-        new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: 'USD'
-        }).format(value / 100),
-
       products: []
     };
-
     this.getProducts = this.getProducts.bind(this);
+    this.toDollars = this.toDollars.bind(this);
   }
 
   componentDidMount() {
@@ -28,13 +22,20 @@ export default class ProductList extends React.Component {
       .then(response => this.setState({ products: response }));
   }
 
+  toDollars(value) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(value / 100);
+  }
+
   render() {
     const productList = this.state.products.map(singleProductData => {
       return (
         <ProductListItem key={singleProductData.id}
           id={singleProductData.id}
           name={singleProductData.name}
-          price={singleProductData.price}
+          price={this.toDollars(singleProductData.price)}
           image={singleProductData.image}
           shortDescription={singleProductData.shortDescription}
         />
