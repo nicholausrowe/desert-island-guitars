@@ -29,26 +29,21 @@ export default class ProductList extends React.Component {
   }
 
   render() {
-    const allProductDomElements = [];
-    for (let i = 0; i < this.state.products.length; i++) {
-
-      const singleDomElement = <ProductListItem
-        key= {this.state.products[i].id}
-        id= {this.state.products[i].id}
-        name= {this.state.products[i].name}
-        price= {this.state.formatter(this.state.products[i].price)}
-        shortDescription= {this.state.products[i].shortDescription}
-        image= {this.state.products[i].image}
-      />;
-      allProductDomElements.push(singleDomElement);
-    }
-
+    const productList = this.state.products.map(singleProductData => {
+      return (
+        <ProductListItem key={singleProductData.id}
+          id={singleProductData.id}
+          name={singleProductData.name}
+          price={singleProductData.price}
+          image={singleProductData.image}
+          shortDescription={singleProductData.shortDescription}
+        />
+      );
+    });
     return (
       <div className="row">
-        {allProductDomElements}
+        {productList}
       </div>
-
     );
   }
-
 }
