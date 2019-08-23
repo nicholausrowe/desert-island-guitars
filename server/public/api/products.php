@@ -9,6 +9,9 @@ $output = file_get_contents('dummy-products-list.json');
 
 print($output);
 
+if (!$conn) {
+  throw new Exception(mysqli_connect_error());
+};
 
 
 // if (empty($_GET['id'])) {
