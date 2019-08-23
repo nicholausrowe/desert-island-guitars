@@ -5,7 +5,7 @@ set_exception_handler('error_handler');
 
 startup();
 
-header('Content-Type: application/json');
+// header('Content-Type: application/json');
 
 // $output = file_get_contents('dummy-products-list.json');
 

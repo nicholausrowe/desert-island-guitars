@@ -13,7 +13,7 @@ function error_handler($error) {
 }
 
 function startup() {
-
+    header('Content-Type: application/json');
 
 }
 ?>
