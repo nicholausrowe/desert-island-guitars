@@ -10,7 +10,6 @@ if (empty($_GET['id'])) {
   throw new Exception(mysqli_connect_error());
 };
 
-
 $query = "SELECT * FROM `products`";
 
 $result = mysqli_query($conn, $query);
