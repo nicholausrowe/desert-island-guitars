@@ -5,12 +5,6 @@ set_exception_handler('error_handler');
 
 startup();
 
-// header('Content-Type: application/json');
-
-// $output = file_get_contents('dummy-products-list.json');
-
-// print($output);
-
 if (!$conn) {
   throw new Exception(mysqli_connect_error());
 };
@@ -31,13 +25,5 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 print(json_encode($output));
-
-// if (empty($_GET['id'])) {
-//   readfile('dummy-products-list.json');
-// } else {
-//   readfile('dummy-product-details.json');
-// }
-
-
 
 ?>
