@@ -5,7 +5,8 @@ set_exception_handler('error_handler');
 
 startup();
 
-if (!$conn) {
+if (empty($_GET['id'])) {
+  if (!$conn) {
   throw new Exception(mysqli_connect_error());
 };
 
@@ -25,5 +26,11 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 print(json_encode($output));
+} else {
+  readfile('dummy-product-details.json');
+}
+
+
+
 
 ?>
