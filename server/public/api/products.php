@@ -10,13 +10,12 @@ if (empty($_GET['id'])) {
   throw new Exception(mysqli_connect_error());
 };
 
-
 $query = "SELECT * FROM `products`";
 
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
-  throw new Exception(mysqli_connect_error());
+  throw new Exception("Connect failed: " . mysqli_connect_error());
 };
 
 $output = [];
@@ -26,11 +25,5 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 print(json_encode($output));
-} else {
-  readfile('dummy-product-details.json');
-}
-
-
-
 
 ?>
