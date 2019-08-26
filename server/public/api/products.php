@@ -8,6 +8,7 @@ startup();
 if (empty($_GET['id'])) {
   $whereClause = "";
 } else {
+
   if (!is_numeric($_GET['id'])) {
     throw new Exception("id needs to be a number");
   } else {
@@ -26,6 +27,7 @@ if (!$result) {
 $output = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
+
   $output[] = $row;
 };
 
