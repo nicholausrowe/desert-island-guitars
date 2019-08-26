@@ -8,11 +8,12 @@ startup();
 if (empty($_GET['id'])) {
   $whereClause = "";
 } else {
-  $whereClause = "WHERE `id` = {$_GET['id']}";
-};
 
-if (!$conn) {
-  throw new Exception(mysqli_connect_error());
+  if (!is_numeric($_GET['id'])) {
+    throw new Exception("id needs to be a number");
+  } else {
+    $whereClause = "WHERE `id` = {$_GET['id']}";
+  }
 };
 
 $query = "SELECT * FROM `products` {$whereClause}";
@@ -26,7 +27,14 @@ if (!$result) {
 $output = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
-  array_push($output, $row);
+
+  $output[] = $row;
 };
+
+if (count($output) === 1){
+  $output = $output[0];
+};
+
 print(json_encode($output));
+
 ?>
