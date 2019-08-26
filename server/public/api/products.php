@@ -6,11 +6,16 @@ set_exception_handler('error_handler');
 startup();
 
 if (empty($_GET['id'])) {
-  if (!$conn) {
-  throw new Exception(mysqli_connect_error());
+  $whereClause = "";
+} else {
+  if (!is_numeric($_GET['id'])) {
+    throw new Exception("id needs to be a number");
+  } else {
+    $whereClause = "WHERE `id` = {$_GET['id']}";
+  }
 };
 
-$query = "SELECT * FROM `products`";
+$query = "SELECT * FROM `products` {$whereClause}";
 
 $result = mysqli_query($conn, $query);
 
@@ -21,8 +26,12 @@ if (!$result) {
 $output = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
-  array_push($output, $row);
-}
+  $output[] = $row;
+};
+
+if (count($output) === 1){
+  $output = $output[0];
+};
 
 print(json_encode($output));
 
