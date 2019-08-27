@@ -10,7 +10,7 @@ export default class ProductDetails extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/products.php?id=1`)
+    fetch(`/api/products.php?id=` + this.props.id)
       .then(res => res.json())
       .then(response => this.setState({ product: response }));
   }
@@ -27,9 +27,10 @@ export default class ProductDetails extends React.Component {
       return (
 
         <div className="container">
-          <div className="row">
+          <div className="row" >
             <div className="col">
-              <h5>&larr; back to catalog</h5>
+              <h5 onClick={() => this.props.setView('catalog', {})}>
+              &larr; back to catalog</h5>
             </div>
           </div>
 

@@ -29,15 +29,26 @@ export default class App extends React.Component {
   // Define a setView method in App that takes two parameters; name and params.setView replaces App's view state with the new name String and params Object.
 
   render() {
-    return (
-      <div>
-        <Header text="Wicked Sales"/>
-        <ProductList
-          setView = {this.setView}
-        />
-        <ProductDetails/>
-      </div>
 
-    );
+    if (this.state.view.name === 'catalog') {
+
+      return (
+        <div>
+          <Header text="Wicked Sales" />
+          <ProductList
+            setView={this.setView} />
+        </div>);
+
+    } else {
+
+      return (
+        <div>
+          <Header text="Wicked Sales" />
+          <ProductDetails
+            id={this.state.view.params.id}
+            setView={this.setView}/>
+        </div>
+      );
+    }
   }
 }
