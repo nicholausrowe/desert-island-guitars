@@ -45,7 +45,7 @@ export default class ProductDetails extends React.Component {
           </div>
 
           <div className="row">
-            <p className="card-text">{product.shortDescription}</p>
+            <p className="card-text">{product.longDescription}</p>
           </div>
 
         </div>
