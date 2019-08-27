@@ -17,6 +17,10 @@ export default class App extends React.Component {
     this.setView = this.setView.bind(this);
   }
 
+  componentDidMount() {
+    this.getCartItems();
+  }
+
   setView(name, params) {
     this.setState(
       { view:
@@ -29,10 +33,8 @@ export default class App extends React.Component {
   getCartItems() {
     fetch(`/api/cart.php`)
       .then(res => res.json())
-      .then(response => this.setState({ products: response }));
+      .then(response => this.setState({ cart: response }));
   }
-
-  // Define a method in App named getCartItems that retrieves the user's cart items with a GET request to "/api/cart.php"
 
   render() {
 
