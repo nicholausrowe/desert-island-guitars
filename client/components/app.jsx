@@ -36,14 +36,14 @@ export default class App extends React.Component {
         <div>
           <Header text="Wicked Sales" />
           <ProductList
-            setView={this.setView} />
+            setView={this.setView}/>
         </div>);
 
     } else {
 
       return (
         <div>
-          <Header text="Wicked Sales" />
+          <Header text="Wicked Sales"/>
           <ProductDetails
             id={this.state.view.params.id}
             setView={this.setView}/>

@@ -27,6 +27,7 @@ export default class ProductDetails extends React.Component {
       return (
 
         <div className="container">
+
           <div className="row" >
             <div className="col">
               <h5 onClick={() => this.props.setView('catalog', {})}>

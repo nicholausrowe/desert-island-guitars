@@ -13,11 +13,7 @@ if (empty($_GET['id'])) {
   $whereClause = "WHERE `id` = {$_GET['id']}";
 };
 
-<<<<<<< HEAD
 $query = "SELECT * FROM `products` {$whereClause}";
-=======
-$query = "SELECT * FROM `products`";
->>>>>>> 060f2e5b5bb8d68d24fd2f33ebf8a41109405f50
 
 $result = mysqli_query($conn, $query);
 //$result = $conn->query($query);

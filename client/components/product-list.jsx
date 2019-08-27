@@ -40,8 +40,7 @@ export default class ProductList extends React.Component {
           price={this.toDollars(singleProductData.price)}
           image={singleProductData.image}
           shortDescription={singleProductData.shortDescription}
-          setView={this.props.setView}
-        />
+          setView={this.props.setView}/>
       );
     });
     return (
