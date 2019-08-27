@@ -21,12 +21,13 @@ export default class App extends React.Component {
     this.setState(
       { view: {
         name: name,
-        params: params
+        params: params,
+        cart: []
       }
       });
   }
 
-  // Define a setView method in App that takes two parameters; name and params.setView replaces App's view state with the new name String and params Object.
+  //  Add an initial state property to App named cart set to an empty Array.
 
   render() {
 
