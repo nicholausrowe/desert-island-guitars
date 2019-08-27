@@ -15,6 +15,7 @@ export default class App extends React.Component {
       cart: []
     };
     this.setView = this.setView.bind(this);
+    this.getCartItems = this.getCartItems.bind(this);
   }
 
   componentDidMount() {
@@ -51,7 +52,9 @@ export default class App extends React.Component {
 
       return (
         <div>
-          <Header text="Wicked Sales"/>
+          <Header
+            text="Wicked Sales"
+            cartItemAmount={this.state.cart}/>
           <ProductDetails
             id={this.state.view.params.id}
             setView={this.setView}/>
