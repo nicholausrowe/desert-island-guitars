@@ -11,9 +11,9 @@ export default class App extends React.Component {
       view: {
         name: 'catalog',
         params: {}
-      }
+      },
+      cart: []
     };
-
     this.setView = this.setView.bind(this);
   }
 
@@ -26,7 +26,13 @@ export default class App extends React.Component {
       });
   }
 
-  // Define a setView method in App that takes two parameters; name and params.setView replaces App's view state with the new name String and params Object.
+  getCartItems() {
+    fetch(`/api/cart.php`)
+      .then(res => res.json())
+      .then(response => this.setState({ products: response }));
+  }
+
+  // Define a method in App named getCartItems that retrieves the user's cart items with a GET request to "/api/cart.php"
 
   render() {
 
