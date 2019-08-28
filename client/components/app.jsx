@@ -43,7 +43,9 @@ export default class App extends React.Component {
 
       return (
         <div>
-          <Header text="Wicked Sales" />
+          <Header
+            text="Wicked Sales"
+            cartItemAmount={this.state.cart}/>
           <ProductList
             setView={this.setView}/>
         </div>);
