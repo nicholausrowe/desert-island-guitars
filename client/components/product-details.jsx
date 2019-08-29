@@ -43,6 +43,10 @@ export default class ProductDetails extends React.Component {
               <h2 className="card-title">{product.name}</h2>
               <h3 className="card-subtitle text-muted">{product.price}</h3>
               <p className="card-text">{product.shortDescription}</p>
+
+              <a href="#" className="btn btn-primary"
+                onClick={() => this.props.addToCart(product)}>
+                  Add to Cart</a>
             </div>
           </div>
 
@@ -55,7 +59,5 @@ export default class ProductDetails extends React.Component {
       );
     }
   }
-
-  // Complete the implementation of ProductDetails's render method to conditionally render a view of the product's details(as soon as the details are loaded from the server).
 
 }

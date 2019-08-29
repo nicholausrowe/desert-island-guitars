@@ -12,8 +12,6 @@ export default class ProductList extends React.Component {
     this.toDollars = this.toDollars.bind(this);
   }
 
-  // Pass App's setView method through ProductList via props so that when a user clicks on a ProductListItem, App's view state gets replaced with { name: 'details', params: { id: product.id } }
-
   componentDidMount() {
     this.getProducts();
   }
