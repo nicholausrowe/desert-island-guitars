@@ -16,5 +16,3 @@ export default function Header(props) {
     </nav>
   );
 }
-
-// Modify Header to receive a cartItemCount prop that is the number of items in App's cart state. Header should display a shopping cart icon with the number of items in the user's cart.

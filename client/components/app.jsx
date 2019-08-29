@@ -37,6 +37,12 @@ export default class App extends React.Component {
       .then(response => this.setState({ cart: response }));
   }
 
+  addToCart(product) {
+
+  }
+
+  // Define a method in App named addToCart with one parameter, product, which is a product Object.addToCart should POST the product to "/api/cart.php" before adding it to the App's cart state.
+
   render() {
 
     if (this.state.view.name === 'catalog') {
