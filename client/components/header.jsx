@@ -6,12 +6,9 @@ export default function Header(props) {
 
       <span className="navbar-brand mb-0 h1">[logo] Wicked Sales</span>
 
-      <div>
+      <span className="navbar-brand mb-0 h1">
 
-        <span className="navbar-brand mb-0 h1">
-
-  [icon] {props.cartItemCount} items</span>
-      </div>
+      [icon] {props.cartItemCount} items</span>
 
     </nav>
   );

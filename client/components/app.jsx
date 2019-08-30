@@ -43,15 +43,13 @@ export default class App extends React.Component {
       method: 'POST',
       body: JSON.stringify(product)
     })
-      .then(this.getCartItems(product))
       .then(res => res.json())
-      .then(product => this.setState({ cart: product }));
-
-    // this.state.cart += response)
+      .then(product => {
+        const newArray = this.state.cart.concat(product);
+        this.setState({ cart: newArray });
+      });
 
   }
-
-  // Define a method in App named addToCart with one parameter, product, which is a product Object.addToCart should POST the product to "/api/cart.php" before adding it to the App's cart state.
 
   render() {
 
