@@ -56,7 +56,8 @@ export default class CheckoutForm extends React.Component {
             </div>
 
           </form>
-
+          <h5 onClick={() => this.props.view('catalog', {})}>
+            &larr; Continue Shopping</h5>
           <button
             type="button d-inline-block"
             className="btn btn-success"
