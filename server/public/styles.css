@@ -1,20 +1,4 @@
-i {
-color: white;
-
-/* background-color: white; */
-};
-
-
-.fas, .fa-shopping-cart {
-
-color: white;
-
-background-color: white;
-};
-
-
-fas fa-shopping-cart {
-
-color: white;
-
-};
+.itemImage {
+    max-height: 150px;
+    width: auto;
+}

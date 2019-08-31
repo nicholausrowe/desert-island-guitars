@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
+import CartSummary from './cart-summary';
 
 export default class App extends React.Component {
 
@@ -17,6 +18,7 @@ export default class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.renderView = this.renderView.bind(this);
   }
 
   componentDidMount() {
@@ -48,35 +50,44 @@ export default class App extends React.Component {
         const newArray = this.state.cart.concat(product);
         this.setState({ cart: newArray });
       });
-
   }
 
-  render() {
-
-    if (this.state.view.name === 'catalog') {
-
-      return (
-        <div>
-          <Header
-            text="Wicked Sales"
-            cartItemCount={this.state.cart.length}/>
+  renderView() {
+    switch (this.state.view.name) {
+      case 'catalog':
+        return (
           <ProductList
             setView={this.setView}/>
-        </div>);
+        );
 
-    } else {
-
-      return (
-        <div>
-          <Header
-            text="Wicked Sales"
-            cartItemCount={this.state.cart.length}/>
+      case 'details':
+        return (
           <ProductDetails
             id={this.state.view.params.id}
             setView={this.setView}
             addToCart={this.addToCart}/>
-        </div>
-      );
+        );
+
+      case 'cart':
+        return (
+          <CartSummary
+            cartArray={this.state.cart}
+            view={this.setView}/>
+        );
     }
   }
+
+  render() {
+    return (
+      <React.Fragment>
+        <Header
+          text="Wicked Sales"
+          cartItemCount={this.state.cart.length}
+          setView={this.setView}/>
+
+        {this.renderView()}
+      </React.Fragment>
+    );
+  }
+
 }

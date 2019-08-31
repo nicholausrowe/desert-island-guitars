@@ -19,10 +19,9 @@ if (empty($_GET['id'])) {
 $query = "SELECT * FROM `products` {$whereClause}";
 
 $result = mysqli_query($conn, $query);
-//$result = $conn->query($query);
 
 if (!$result) {
-  throw new Exception("Connect failed: " . mysqli_connect_error());
+  throw new Exception("Fetch is not happening: " . mysqli_connect_error());
 };
 
 if (!empty($_GET['id']) && mysqli_num_rows($result) === 0) {
