@@ -18,6 +18,7 @@ export default class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
     this.renderView = this.renderView.bind(this);
   }
 
@@ -50,6 +51,10 @@ export default class App extends React.Component {
         const newArray = this.state.cart.concat(product);
         this.setState({ cart: newArray });
       });
+  }
+
+  placeOrder() {
+
   }
 
   renderView() {
