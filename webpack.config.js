@@ -1,13 +1,13 @@
 const path = require('path');
 
-const srcPath = path.resolve(__dirname, 'client');
+const clientPath = path.resolve(__dirname, 'client');
 const publicPath = path.resolve(__dirname, 'server/public');
 
 module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  entry: './client',
+  entry: clientPath,
   output: {
     path: publicPath
   },
@@ -15,7 +15,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        include: srcPath,
+        include: clientPath,
         use: {
           loader: 'babel-loader',
           options: {
@@ -37,10 +37,7 @@ module.exports = {
     stats: 'minimal',
     proxy: {
       '/api': {
-        target: 'http://localhost',
-        headers: {
-          Host: 'wicked-sales.localhost'
-        }
+        target: 'http://localhost:9000'
       }
     }
   }
