@@ -18,7 +18,6 @@ export default class ProductDetails extends React.Component {
   // method to ProductDetails that retrieves the details of a specific product by id from the server with a GET request.e.g. "/api/products.php?id=1"
 
   render() {
-
     const product = this.state.product;
 
     if (!product) {
@@ -59,5 +58,3 @@ export default class ProductDetails extends React.Component {
       );
     }
   }
-
-}

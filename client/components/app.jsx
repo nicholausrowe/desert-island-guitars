@@ -42,6 +42,7 @@ export default class App extends React.Component {
       .then(response => this.setState({ cart: response }));
   }
 
+
   addToCart(product) {
     fetch(`/api/cart.php`, {
       method: 'POST',
