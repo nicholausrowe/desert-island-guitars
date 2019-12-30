@@ -5,3 +5,7 @@ node_modules/
 features/
 server/api/_config.php
 OLD FILES/
+server/public/api/db_connection.php
+server/public/api/db_connection.php.config
+server/public/main.js
+server/public/main.js.map
