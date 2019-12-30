@@ -3,6 +3,7 @@ import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
+import CheckoutForm from './checkout-form';
 
 export default class App extends React.Component {
 
@@ -18,6 +19,7 @@ export default class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
     this.renderView = this.renderView.bind(this);
   }
 
@@ -52,6 +54,10 @@ export default class App extends React.Component {
       });
   }
 
+  placeOrder() {
+
+  }
+
   renderView() {
     switch (this.state.view.name) {
       case 'catalog':
@@ -72,6 +78,13 @@ export default class App extends React.Component {
         return (
           <CartSummary
             cartArray={this.state.cart}
+            view={this.setView}/>
+        );
+
+      case 'checkout':
+        return (
+          <CheckoutForm
+            placeOrder={this.placeOrder}
             view={this.setView}/>
         );
     }
