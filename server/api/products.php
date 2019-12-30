@@ -14,3 +14,4 @@ function get_products($link) {
   $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
   return $products;
 }
+sadfsd;
