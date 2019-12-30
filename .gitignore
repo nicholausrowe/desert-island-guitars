@@ -2,4 +2,6 @@
 .vscode/
 .DS_Store
 node_modules/
-server/public/api/db_connection.php
+features/
+server/api/_config.php
+OLD FILES/
