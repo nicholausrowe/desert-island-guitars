@@ -1,10 +1,10 @@
 .idea/
 .vscode/
 .DS_Store
+_config.php
 node_modules/
 features/
 server/api/_config.php
 OLD FILES/
-server/public/main.js
-server/public/main.js.map
-server/sessions/
+server/sessions/sess_*
+server/public/main.js*
