@@ -2,6 +2,7 @@
 .vscode/
 .DS_Store
 node_modules/
+features/
 server/public/api/db_connection.php
 server/public/api/db_connection.php.config
 server/public/main.js
