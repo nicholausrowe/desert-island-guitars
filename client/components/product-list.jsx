@@ -32,8 +32,8 @@ export default class ProductList extends React.Component {
   render() {
     const productList = this.state.products.map(singleProductData => {
       return (
-        <ProductListItem key={singleProductData.id}
-          id={singleProductData.id}
+        <ProductListItem key={singleProductData.productId}
+          productId={singleProductData.productId}
           name={singleProductData.name}
           price={this.toDollars(singleProductData.price)}
           image={singleProductData.image}
