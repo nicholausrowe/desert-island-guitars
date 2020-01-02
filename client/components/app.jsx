@@ -71,7 +71,7 @@ export default class App extends React.Component {
       case 'details':
         return (
           <ProductDetails
-            id={this.state.view.params.id}
+            productId={this.state.view.params.productId}
             setView={this.setView}
             addToCart={this.addToCart}/>
         );
