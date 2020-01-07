@@ -20,7 +20,7 @@ if ($request['method'] === 'GET') {
         FROM
           `products`
         WHERE
-          `productId` = {$_GET['productId']}"
+          `productId` = {$_GET['productId']}";
 
     }
   };
@@ -34,8 +34,8 @@ $sqlTimeStamp =
   VALUE
     (CURRENT_TIMESTAMP)";
 
-$result = $link->query($sqlTimeStamp);
-$cartId = $result->insert_id;
+$timeStamp = $link->query($sqlTimeStamp);
+$cartId = $timeStamp->insert_id;
 
 
 $sqlCartItems =
@@ -49,8 +49,9 @@ $sqlCartItems =
       {$_GET['productId']},
       $productPrice)";
 
-$result = $link->query($sqlCartItems);
-$itemId = $result->insert_id;
+$item = $link->query($sqlCartItems);
+$cartItemId = $item->insert_id;
+
 
 
 
