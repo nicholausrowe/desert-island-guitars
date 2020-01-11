@@ -5,6 +5,6 @@ _config.php
 node_modules/
 features/
 server/api/_config.php
-_OLD FILES/
+_OLD_FILES/
 server/sessions/sess_*
 server/public/main.js*
