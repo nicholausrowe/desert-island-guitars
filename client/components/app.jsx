@@ -45,14 +45,14 @@ export default class App extends React.Component {
   }
 
   addToCart(product) {
-    fetch('/api/cart.php', {
+    fetch('/api/cart', {
       method: 'POST',
       body: JSON.stringify(product)
     })
       .then(res => res.json())
       .then(product => {
-        const newArray = this.state.cart.concat(product);
-        this.setState({ cart: newArray });
+        const updatedCart = this.state.cart.concat(product);
+        this.setState({ cart: updatedCart });
       });
   }
 
