@@ -54,10 +54,11 @@ export default class App extends React.Component {
         const updatedCart = this.state.cart.concat(product);
         this.setState({ cart: updatedCart });
       });
+    this.props.view('catalog', {});
   }
 
   placeOrder(order) {
-    fetch('/api/cart', {
+    fetch('/api/orders', {
       method: 'POST',
       body: JSON.stringify(order)
     })
