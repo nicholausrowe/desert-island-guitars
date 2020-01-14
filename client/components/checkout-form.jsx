@@ -62,7 +62,7 @@ export default class CheckoutForm extends React.Component {
           <button
             type="button d-inline-block"
             className="btn btn-success"
-            onClick={() => { this.props.view('catalog', {}); }}>
+            onClick={() => { this.props.placeOrder('catalog', {}); }}>
 
             Place Order
           </button>
