@@ -56,7 +56,12 @@ export default class App extends React.Component {
       });
   }
 
-  placeOrder() {
+  placeOrder(order) {
+    fetch('/api/cart', {
+      method: 'POST',
+      body: JSON.stringify(order)
+    })
+      .then(res => res.json());
 
   }
 
