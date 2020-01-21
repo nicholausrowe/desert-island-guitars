@@ -51,10 +51,9 @@ export default class App extends React.Component {
     })
       .then(res => res.json())
       .then(product => {
-        const updatedCart = this.state.cart.concat(product);
-        this.setState({ cart: updatedCart });
+        // const updatedCart = this.state.cart.concat(product);
+        this.setState({ cart: product });
       });
-    this.props.view('catalog', {});
   }
 
   placeOrder(order) {
@@ -63,7 +62,8 @@ export default class App extends React.Component {
       body: JSON.stringify(order)
     })
       .then(res => res.json());
-
+    this.setState({ cart: [] });
+    this.setView('catalog', {});
   }
 
   renderView() {

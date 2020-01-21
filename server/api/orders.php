@@ -8,7 +8,7 @@ if ($request['method'] === 'POST') {
   $shippingAddress = $request['body']['shippingAddress'];
 
   if (!isset($cartId)) {
-    throw new ApiError('Ain\'t shit here yet. An active shopping cart is required.', 400);
+    throw new ApiError('Nothin\' here yet. An active shopping cart is required.', 400);
   } else {
     check_customer_info($name, $creditCard, $shippingAddress);
     $message = create_order($link, $cartId, $name, $creditCard, $shippingAddress);

@@ -6,7 +6,10 @@ if ($request['method'] === 'GET') {
   if (!isset($_SESSION['cart_id'])) {
     $response['body'] = [];
   } else {
-    get_cart_items($link);}
+    $response['body'] = get_cart_items($link);
+    send($response);
+  }
+
 
 } else {
   if ($request['method'] === 'POST') {
@@ -15,18 +18,36 @@ if ($request['method'] === 'GET') {
     if (!isset($request['body']['productId'])) {
       throw new ApiError('GOD DAMN IT. What kind of request is that? A bad one. That\'s what kind.', 400);
     } else {
+
+      $cartId = check_cart_id($link);
       $productId = $request['body']['productId'];
-      $message = add_to_cart($link, $productId);
-      $response['body'] = $message;
+      $message = add_to_cart($link, $cartId, $productId);
+      // $response['body'] = $message;
+      $response['body'] = get_cart_items($link);
+      send($response);
     }
   }
 }
 
-send($response);
+
+
+
+
+
+
+function check_cart_id($link) {
+  if (!isset($_SESSION['cart_id'])) {
+    $_SESSION['cart_id'] = create_cart_id($link);
+    return $_SESSION['cart_id'];
+  };
+
+  $cartId = $_SESSION['cart_id'];
+  return $cartId;
+}
 
 function create_cart_id($link) {
   $sqlTimeStamp =
-   "INSERT INTO
+    "INSERT INTO
     carts (createdAt)
     VALUE
       (CURRENT_TIMESTAMP)";
@@ -37,7 +58,7 @@ function create_cart_id($link) {
 
 function get_product_price($link, $productId) {
   $sqlProductPrice =
-   "SELECT
+    "SELECT
       price
     FROM
       `products`
@@ -49,22 +70,63 @@ function get_product_price($link, $productId) {
   return $price;
 }
 
-function add_to_cart($link, $productId) {
-  $cartId = create_cart_id($link);
-  $price = get_product_price($link, $productId);
-
+function create_cart_item($link, $cartId, $productId, $price) {
   $sqlInsertCartItem =
-   "INSERT INTO
+    "INSERT INTO
       cartItems
     SET
       cartId = {$cartId},
       productId = {$productId},
       price = {$price}";
   $link->query($sqlInsertCartItem);
-  $cartItemId = $link->insert_id;
+  $link->insert_id;
+}
 
-  $sqlItemInfoJoin =
-   "SELECT
+
+function add_to_cart($link, $cartId, $productId) {
+
+
+  $price = get_product_price($link, $productId);
+  create_cart_item($link, $cartId, $productId, $price);
+
+
+  // $sqlItemInfoJoin =
+  //   "SELECT
+  //     c.cartItemId,
+  //     c.price,
+  //     c.productId,
+  //     p.image,
+  //     p.name,
+  //     p.shortDescription
+  //   FROM
+  //     `cartItems` as c
+  //   JOIN
+  //     `products` as p
+  //   ON
+  //     c.productId = p.productId
+  //   WHERE
+  //     `cartId` = {$_SESSION['cart_id']}";
+  // $joinResult = $link->query($sqlItemInfoJoin);
+  // $itemAssoc = mysqli_fetch_assoc($joinResult);
+
+  // $_SESSION['cart_id'] = $cartId;
+  // setcookie('cart_id', $_SESSION['cart_id']);
+  // return $itemAssoc;
+
+
+
+
+}
+
+
+
+function get_cart_items($link)
+{
+  $sqlGetCartItems =
+    // "SELECT * FROM `cartItems`
+    // WHERE `cartId` = {$_SESSION['cart_id']}";
+
+  "SELECT
       c.cartItemId,
       c.price,
       c.productId,
@@ -78,18 +140,11 @@ function add_to_cart($link, $productId) {
     ON
       c.productId = p.productId
     WHERE
-      `cartItemId` = {$cartItemId}";
-  $joinResult = $link->query($sqlItemInfoJoin);
-  $itemAssoc = mysqli_fetch_assoc($joinResult);
-  $_SESSION['cart_id'] = $cartId;
-  return $itemAssoc;
-}
+      `cartId` = {$_SESSION['cart_id']}";
 
-function get_cart_items($link) {
-  $sqlGetCartItems =
-   "SELECT * FROM cartItems
-    WHERE cartId = {$_SESSION['cart_id']}";
+
+
   $getResult = $link->query($sqlGetCartItems);
-  $allCartItems = $getResult->fetch_all(MYSQLI_ASSOC);
-  return $allCartItems;
+  $cartItems = $getResult->fetch_all(MYSQLI_ASSOC);
+  return $cartItems;
 }
