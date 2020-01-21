@@ -3,12 +3,12 @@ import CartSummaryItem from './cart-summary-item';
 
 function CartSummary(props) {
   var totalPrice = 0;
-  props.cartArray.forEach(function (item) {
+  props.cartArray.forEach(item => {
     totalPrice += item.price;
   });
   totalPrice = '$' + (totalPrice / 100).toFixed(2);
   var allCartItems = props.cartArray.map(product =>
-    <div className="cartItemRow row border border-secondary rounded my-2" key={product.id}>
+    <div className="cartItemRow row border border-secondary rounded my-2" key={product.productId}>
       <CartSummaryItem item={product} />
     </div>
   );
