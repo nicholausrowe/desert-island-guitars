@@ -6,7 +6,7 @@ if ($request['method'] === 'GET') {
   if (!isset($_SESSION['cart_id'])) {
     $response['body'] = [];
   } else {
-    $response['body'] = load_cart_items($link);
+    $response['body'] = get_cart_items($link);
   }
   send($response);
 
@@ -25,7 +25,7 @@ if ($request['method'] === 'GET') {
   }
 }
 
-function load_cart_items($link) {
+function get_cart_items($link) {
   $sqlCartItems =
     "SELECT
       c.cartItemId,
