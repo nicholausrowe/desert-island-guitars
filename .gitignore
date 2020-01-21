@@ -3,8 +3,6 @@
 .DS_Store
 _config.php
 node_modules/
-features/
 server/api/_config.php
-_OLD_FILES/
 server/sessions/sess_*
 server/public/main.js*
