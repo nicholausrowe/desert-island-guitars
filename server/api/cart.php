@@ -6,7 +6,7 @@ if ($request['method'] === 'GET') {
   if (!isset($_SESSION['cart_id'])) {
     $response['body'] = [];
   } else {
-    $response['body'] = get_cart_items($link);
+    $response['body'] = load_cart_items($link);
   }
   send($response);
 
@@ -19,14 +19,14 @@ if ($request['method'] === 'GET') {
     } else {
       $cartId = check_cart_id($link);
       $productId = $request['body']['productId'];
-      $response['body'] = add_to_cart($link, $cartId, $productId);
+      $response['body'] = added_to_cart($link, $cartId, $productId);
       send($response);
     }
   }
 }
 
-function get_cart_items($link) {
-  $sqlGetCartItems =
+function load_cart_items($link) {
+  $sqlCartItems =
     "SELECT
       c.cartItemId,
       c.price,
@@ -43,12 +43,10 @@ function get_cart_items($link) {
     WHERE
       `cartId` = {$_SESSION['cart_id']}";
 
-  $getResult = $link->query($sqlGetCartItems);
-  $cartItems = $getResult->fetch_all(MYSQLI_ASSOC);
+  $result = $link->query($sqlCartItems);
+  $cartItems = $result->fetch_all(MYSQLI_ASSOC);
   return $cartItems;
 }
-
-
 
 function check_cart_id($link) {
   if (!isset($_SESSION['cart_id'])) {
@@ -84,8 +82,7 @@ function get_product_price($link, $productId) {
   return $price;
 }
 
-
-function add_to_cart($link, $cartId, $productId) {
+function added_to_cart($link, $cartId, $productId) {
   $price = get_product_price($link, $productId);
 
   $sqlInsertCartItem =
@@ -98,7 +95,7 @@ function add_to_cart($link, $cartId, $productId) {
   $link->query($sqlInsertCartItem);
   $cartItemId = $link->insert_id;
 
-  $sqlGetCartItem =
+  $sqlCartItem =
     "SELECT
       c.cartItemId,
       c.price,
@@ -110,22 +107,12 @@ function add_to_cart($link, $cartId, $productId) {
       `cartItems` as c
     JOIN
       `products` as p
-
---     ON
---     `cartItemId` = {$cartItemId}
-
---     WHERE
-
---  c.productId = p.productId
-
-
-
     ON
       c.productId = p.productId
     WHERE
       `cartItemId` = {$cartItemId}";
 
-  $getResult = $link->query($sqlGetCartItem);
-  $cartItem = mysqli_fetch_assoc($getResult);
+  $result = $link->query($sqlCartItem);
+  $cartItem = mysqli_fetch_assoc($result);
   return $cartItem;
 }
