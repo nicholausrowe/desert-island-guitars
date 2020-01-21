@@ -19,8 +19,7 @@ if ($request['method'] === 'GET') {
     } else {
       $cartId = check_cart_id($link);
       $productId = $request['body']['productId'];
-      add_to_cart($link, $cartId, $productId);
-      $response['body'] = get_cart_items($link);
+      $response['body'] = add_to_cart($link, $cartId, $productId);
       send($response);
     }
   }
@@ -49,10 +48,7 @@ function get_cart_items($link) {
   return $cartItems;
 }
 
-function add_to_cart($link, $cartId, $productId) {
-  $price = get_product_price($link, $productId);
-  create_cart_item($link, $cartId, $productId, $price);
-}
+
 
 function check_cart_id($link) {
   if (!isset($_SESSION['cart_id'])) {
@@ -88,7 +84,10 @@ function get_product_price($link, $productId) {
   return $price;
 }
 
-function create_cart_item($link, $cartId, $productId, $price) {
+
+function add_to_cart($link, $cartId, $productId) {
+  $price = get_product_price($link, $productId);
+
   $sqlInsertCartItem =
     "INSERT INTO
       cartItems
@@ -97,5 +96,36 @@ function create_cart_item($link, $cartId, $productId, $price) {
       productId = {$productId},
       price = {$price}";
   $link->query($sqlInsertCartItem);
-  $link->insert_id;
+  $cartItemId = $link->insert_id;
+
+  $sqlGetCartItem =
+    "SELECT
+      c.cartItemId,
+      c.price,
+      c.productId,
+      p.image,
+      p.name,
+      p.shortDescription
+    FROM
+      `cartItems` as c
+    JOIN
+      `products` as p
+
+--     ON
+--     `cartItemId` = {$cartItemId}
+
+--     WHERE
+
+--  c.productId = p.productId
+
+
+
+    ON
+      c.productId = p.productId
+    WHERE
+      `cartItemId` = {$cartItemId}";
+
+  $getResult = $link->query($sqlGetCartItem);
+  $cartItem = mysqli_fetch_assoc($getResult);
+  return $cartItem;
 }
