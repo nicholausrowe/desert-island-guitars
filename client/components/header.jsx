@@ -5,7 +5,7 @@ export default function Header(props) {
     <nav className="navbar navbar-dark bg-dark">
 
       <span className="navbar-brand mb-0 h1" onClick={() => { props.setView('catalog', {}); }}>
-        <h2> [logo] Wicked Sales</h2>
+        <h2>desert island guitars</h2>
       </span>
 
       <span className="navbar-brand mb-0 h1">
