@@ -1,4 +1,4 @@
-# wicked-sales
+# desert-island-guitars
 
 
 A full stack LAMP & React shopping cart app.
