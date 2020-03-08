@@ -35,7 +35,7 @@ export default class ProductDetails extends React.Component {
 
           <div className="row">
             <div className="col">
-              <img src={product.image}></img>
+              <img className="img-preview" src={product.image}></img>
             </div>
             <div className="col">
               <h2 className="card-title">{product.name}</h2>
