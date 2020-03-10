@@ -6,3 +6,4 @@ node_modules/
 server/api/_config.php
 server/sessions/sess_*
 server/public/main.js*
+package.json.old
