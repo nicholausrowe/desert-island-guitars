@@ -102,7 +102,7 @@ export default class App extends React.Component {
     return (
       <React.Fragment>
         <Header
-          text="Wicked Sales"
+          text="desert island guitars"
           cartItemCount={this.state.cart.length}
           setView={this.setView}/>
 
